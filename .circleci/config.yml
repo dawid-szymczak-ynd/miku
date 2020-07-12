@@ -70,7 +70,7 @@ jobs:
           command: npm run affected-operation -- --type=lint
       - run:
           name: Run formater
-          command: npm run affected-operation -- --type=check
+          command: npm run affected-operation -- --type=format
   e2e:
     executor: default
     steps:
