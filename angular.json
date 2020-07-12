@@ -318,6 +318,32 @@
           }
         }
       }
+    },
+    "tools": {
+      "projectType": "library",
+      "root": "tools/",
+      "sourceRoot": "tools/scripts",
+      "prefix": "miku-credit",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tools/tsconfig.tools.json",
+              "tools/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!tools/scripts/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "tools/jest.config.js",
+            "tsConfig": "tools/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

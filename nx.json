@@ -40,6 +40,9 @@
     },
     "subcriptio-muneris": {
       "tags": []
+    },
+    "tools": {
+      "tags": ["tools"]
     }
   }
 }
