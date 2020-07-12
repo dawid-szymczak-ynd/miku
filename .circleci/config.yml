@@ -85,7 +85,7 @@ jobs:
       - setup
       - run:
           name: Build apps
-          command: npm run run-ngcc && npm run affected-operation -- --type=build
+          command: npm run affected-operation -- --type=build
       - persist_to_workspace:
           root: ..
           paths:
