@@ -1,0 +1,122 @@
+version: 2.1
+
+executors:
+  default:
+    working_directory: ~/miku-credit
+    environment:
+      CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
+
+    docker:
+      - image: circleci/node:12-browsers
+
+commands:
+  npm_install:
+    description: 'Install Dependencies'
+    steps:
+      - run: npm install
+      - run: ./node_modules/.bin/cypress verify
+      - save_cache:
+          key: nrwl-nx-node12-npm-key-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/node_modules
+      - save_cache:
+          key: nrwl-nx-node12-cypress-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.cache/Cypress
+  restore_cypress_cache:
+    description: 'Restore Cypress Cache'
+    steps:
+      - restore_cache:
+          keys:
+            - nrwl-nx-node12-cypress-{{ checksum "package-lock.json" }}
+            - nrwl-nx-node12-cypress-
+  restore_npm_cache:
+    description: 'Restore Cached Dependencies'
+    steps:
+      - restore_cache:
+          keys:
+            - nrwl-nx-node12-npm-key-{{ checksum "package-lock.json" }}
+            - nrwl-nx-node12-npm-key-
+  setup:
+    description: 'Setup Executor'
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ..
+
+jobs:
+  install:
+    executor: default
+    steps:
+      - checkout
+      - restore_npm_cache
+      - restore_cypress_cache
+      - npm_install
+      - persist_to_workspace:
+          root: ..
+          paths:
+            - miku-credit/node_modules
+            - .cache/Cypress
+  checks-and-unit-tests:
+    executor: default
+    steps:
+      - setup
+      - run:
+          name: Run Unit Tests
+          command: npm run affected-operation -- --type=test
+      - run:
+          name: Run Lint
+          command: npm run affected-operation -- --type=lint
+      - run:
+          name: Run formater
+          command: npm run affected-operation -- --type=format
+  e2e:
+    executor: default
+    steps:
+      - setup
+      - run:
+          name: Run E2E tests
+          command: npm run affected-operation -- --type=e2e
+          no_output_timeout: 30m
+  build:
+    executor: default
+    steps:
+      - setup
+      - run:
+          name: Build apps
+          command: npm run affected-operation -- --type=build
+      - persist_to_workspace:
+          root: ..
+          paths:
+            - miku-credit/dist
+  push-images:
+    executor: default
+    steps:
+      - setup
+      - run:
+          name: Push Docker Images
+          command: |
+            eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+            npm run push-images
+
+workflows:
+  version: 2.1
+  default_workflow:
+    jobs:
+      - install
+      - checks-and-unit-tests:
+          requires:
+            - install
+      - e2e:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+            - checks-and-unit-tests
+            - e2e
+      - push-images:
+          requires:
+            - install
+            - build
