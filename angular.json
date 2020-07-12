@@ -1,0 +1,336 @@
+{
+  "version": 1,
+  "projects": {
+    "miku-credit-front": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/miku-credit-front",
+      "sourceRoot": "apps/miku-credit-front/src",
+      "prefix": "miku-credit",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/miku-credit-front",
+            "index": "apps/miku-credit-front/src/index.html",
+            "main": "apps/miku-credit-front/src/main.ts",
+            "polyfills": "apps/miku-credit-front/src/polyfills.ts",
+            "tsConfig": "apps/miku-credit-front/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/miku-credit-front/src/favicon.ico",
+              "apps/miku-credit-front/src/assets"
+            ],
+            "styles": ["apps/miku-credit-front/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/miku-credit-front/src/environments/environment.ts",
+                  "with": "apps/miku-credit-front/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "miku-credit-front:build",
+            "proxyConfig": "apps/miku-credit-front/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "miku-credit-front:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "miku-credit-front:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/miku-credit-front/tsconfig.app.json",
+              "apps/miku-credit-front/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/miku-credit-front/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/miku-credit-front/jest.config.js",
+            "tsConfig": "apps/miku-credit-front/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/miku-credit-front/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "miku-credit-front-e2e": {
+      "root": "apps/miku-credit-front-e2e",
+      "sourceRoot": "apps/miku-credit-front-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/miku-credit-front-e2e/cypress.json",
+            "tsConfig": "apps/miku-credit-front-e2e/tsconfig.e2e.json",
+            "devServerTarget": "miku-credit-front:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "miku-credit-front:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/miku-credit-front-e2e/tsconfig.e2e.json"],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/miku-credit-front-e2e/**/*"
+            ]
+          }
+        }
+      }
+    },
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "prefix": "api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/tsconfig.app.json",
+              "apps/api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "tsConfig": "apps/api/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-interfaces": {
+      "root": "libs/api-interfaces",
+      "sourceRoot": "libs/api-interfaces/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/api-interfaces/tsconfig.lib.json",
+              "libs/api-interfaces/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/api-interfaces/jest.config.js",
+            "tsConfig": "libs/api-interfaces/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "book-keeper": {
+      "root": "apps/book-keeper",
+      "sourceRoot": "apps/book-keeper/src",
+      "projectType": "application",
+      "prefix": "book-keeper",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/book-keeper",
+            "main": "apps/book-keeper/src/main.ts",
+            "tsConfig": "apps/book-keeper/tsconfig.app.json",
+            "assets": ["apps/book-keeper/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/book-keeper/src/environments/environment.ts",
+                  "with": "apps/book-keeper/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "book-keeper:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/book-keeper/tsconfig.app.json",
+              "apps/book-keeper/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/book-keeper/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/book-keeper/jest.config.js",
+            "tsConfig": "apps/book-keeper/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "subcriptio-muneris": {
+      "root": "apps/subcriptio-muneris",
+      "sourceRoot": "apps/subcriptio-muneris/src",
+      "projectType": "application",
+      "prefix": "subcriptio-muneris",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/subcriptio-muneris",
+            "main": "apps/subcriptio-muneris/src/main.ts",
+            "tsConfig": "apps/subcriptio-muneris/tsconfig.app.json",
+            "assets": ["apps/subcriptio-muneris/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/subcriptio-muneris/src/environments/environment.ts",
+                  "with": "apps/subcriptio-muneris/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "subcriptio-muneris:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/subcriptio-muneris/tsconfig.app.json",
+              "apps/subcriptio-muneris/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/subcriptio-muneris/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/subcriptio-muneris/jest.config.js",
+            "tsConfig": "apps/subcriptio-muneris/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "miku-credit-front"
+}
