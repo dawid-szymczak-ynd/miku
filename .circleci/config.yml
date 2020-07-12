@@ -2,7 +2,7 @@ version: 2.1
 
 executors:
   default:
-    working_directory: ~/repo
+    working_directory: ~/miku-credit
     environment:
       CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
 
@@ -56,7 +56,7 @@ jobs:
       - persist_to_workspace:
           root: ..
           paths:
-            - repo/node_modules
+            - miku-credit/node_modules
             - .cache/Cypress
   checks-and-unit-tests:
     executor: default
@@ -86,6 +86,10 @@ jobs:
       - run:
           name: Build apps
           command: npm run run-ngcc && npm run affected-operation -- --type=build
+      - persist_to_workspace:
+          root: ..
+          paths:
+            - miku-credit/dist
   push-images:
     executor: default
     steps:
