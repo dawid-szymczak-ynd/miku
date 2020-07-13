@@ -96,7 +96,7 @@ jobs:
       - setup
       - restore_npm_cache
       - restore_cypress_cache
-      - npm_install
+      - run: npm install
       - aws-cli/setup
       - run:
           name: Push Docker Images
