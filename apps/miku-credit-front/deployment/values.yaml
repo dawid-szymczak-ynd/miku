@@ -14,7 +14,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 hpa:
-  enabled: false
+  enabled: true
   maxReplicas: 5
   # average total CPU usage per pod (1-100)
   cpu: 50
