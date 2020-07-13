@@ -21,11 +21,11 @@
             "polyfills": "apps/miku-credit-front/src/polyfills.ts",
             "tsConfig": "apps/miku-credit-front/tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "apps/miku-credit-front/src/favicon.ico",
-              "apps/miku-credit-front/src/assets"
+            "assets": ["apps/miku-credit-front/src/favicon.ico", "apps/miku-credit-front/src/assets"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/miku-credit-front/src/styles.scss"
             ],
-            "styles": ["apps/miku-credit-front/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -80,10 +80,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/miku-credit-front/tsconfig.app.json",
-              "apps/miku-credit-front/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/miku-credit-front/tsconfig.app.json", "apps/miku-credit-front/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/miku-credit-front/**/*"]
           }
         },
@@ -120,10 +117,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/miku-credit-front-e2e/tsconfig.e2e.json"],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/miku-credit-front-e2e/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/miku-credit-front-e2e/**/*"]
           }
         }
       }
@@ -166,10 +160,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/api/tsconfig.app.json",
-              "apps/api/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/api/**/*"]
           }
         },
@@ -192,10 +183,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/api-interfaces/tsconfig.lib.json",
-              "libs/api-interfaces/tsconfig.spec.json"
-            ],
+            "tsConfig": ["libs/api-interfaces/tsconfig.lib.json", "libs/api-interfaces/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!libs/api-interfaces/**/*"]
           }
         },
@@ -247,10 +235,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/book-keeper/tsconfig.app.json",
-              "apps/book-keeper/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/book-keeper/tsconfig.app.json", "apps/book-keeper/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/book-keeper/**/*"]
           }
         },
@@ -302,10 +287,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/subcriptio-muneris/tsconfig.app.json",
-              "apps/subcriptio-muneris/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/subcriptio-muneris/tsconfig.app.json", "apps/subcriptio-muneris/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/subcriptio-muneris/**/*"]
           }
         },
@@ -328,10 +310,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tools/tsconfig.tools.json",
-              "tools/tsconfig.spec.json"
-            ],
+            "tsConfig": ["tools/tsconfig.tools.json", "tools/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!tools/scripts/**"]
           }
         },
@@ -358,10 +337,7 @@
               "libs/miku-credit-front/homepage/tsconfig.lib.json",
               "libs/miku-credit-front/homepage/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/miku-credit-front/homepage/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/miku-credit-front/homepage/**/*"]
           }
         },
         "test": {
