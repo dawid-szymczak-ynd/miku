@@ -5,7 +5,6 @@ executors:
     working_directory: ~/miku-credit
     environment:
       CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
-
     docker:
       - image: circleci/node:12-browsers
 
@@ -92,12 +91,16 @@ jobs:
             - miku-credit/dist
   push-images:
     executor: aws-cli/default
+    working_directory: ~/miku-credit
     steps:
       - setup
       - restore_npm_cache
       - restore_cypress_cache
       - run: npm install
       - aws-cli/setup
+      - setup_remote_docker
+      - attach_workspace:
+          at: ~/miku-credit/dist
       - run:
           name: Login into ECR & Push Docker Images
           command: aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_BASE && npm run push-images

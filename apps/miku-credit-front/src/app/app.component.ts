@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { Message } from '@miku-credit/api-interfaces';
 
 @Component({
   selector: 'miku-credit-root',
@@ -8,6 +8,6 @@ import { of } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = of('MockMessage!!');
+  hello$ = this.http.get<Message>('/api/hello');
   constructor(private http: HttpClient) {}
 }

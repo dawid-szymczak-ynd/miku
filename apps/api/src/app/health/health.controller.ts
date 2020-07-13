@@ -1,13 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-  DNSHealthIndicator,
-  HealthCheck,
-  HealthIndicatorResult,
-} from '@nestjs/terminus';
+import { HealthCheck, HealthIndicatorResult } from '@nestjs/terminus';
 
 @Controller('health')
 export class HealthController {
-  constructor(private dns: DNSHealthIndicator) {}
+  constructor() {}
 
   @Get()
   @HealthCheck()
