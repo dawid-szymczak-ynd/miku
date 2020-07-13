@@ -8,6 +8,6 @@ import { of } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = of('MockMessage');
+  hello$ = of('MockMessage!');
   constructor(private http: HttpClient) {}
 }
