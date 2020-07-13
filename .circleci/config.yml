@@ -99,10 +99,11 @@ jobs:
       - run: npm install
       - aws-cli/setup
       - run:
+          name: Login into ECR
+          command: aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_BASE
+      - run:
           name: Push Docker Images
-          command: |
-            eval $(aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_BASE)
-            npm run push-images
+          command: npm run push-images
 
 orbs:
   aws-cli: circleci/aws-cli@1.2.1
