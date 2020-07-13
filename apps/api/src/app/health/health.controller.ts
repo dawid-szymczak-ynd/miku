@@ -7,7 +7,7 @@ export class HealthController {
 
   @Get()
   @HealthCheck()
-  check(): Promise<HealthIndicatorResult> {
+  public check(): Promise<HealthIndicatorResult> {
     return Promise.resolve({});
   }
 }

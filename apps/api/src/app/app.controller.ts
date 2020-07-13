@@ -1,6 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
-
 import { Message } from '@miku-credit/api-interfaces';
+import { Controller, Get } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
@@ -9,7 +8,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('hello')
-  getData(): Message {
+  public getData(): Message {
     return this.appService.getData();
   }
 }

@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
 import { Message } from '@miku-credit/api-interfaces';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getData(): Message {
+  public getData(): Message {
     return { message: 'Welcome to api!!!' };
   }
 }

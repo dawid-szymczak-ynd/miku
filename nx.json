@@ -23,23 +23,23 @@
   },
   "projects": {
     "miku-credit-front": {
-      "tags": []
+      "tags": ["mikuops:miku-credit-front", "type:app"]
     },
     "miku-credit-front-e2e": {
       "tags": [],
       "implicitDependencies": ["miku-credit-front"]
     },
     "api": {
-      "tags": []
+      "tags": ["mikuops:api-gateway", "type:app"]
     },
     "api-interfaces": {
-      "tags": []
+      "tags": ["mikuops:shared", "type:common"]
     },
     "book-keeper": {
-      "tags": []
+      "tags": ["mikuops:book-keeper", "type:app"]
     },
     "subcriptio-muneris": {
-      "tags": []
+      "tags": ["mikuops:subcriptio-muneris", "type:app"]
     },
     "tools": {
       "tags": ["tools"]

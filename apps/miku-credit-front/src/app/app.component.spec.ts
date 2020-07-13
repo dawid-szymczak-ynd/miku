@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { Shallow } from 'shallow-render';
+
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [HttpClientModule],
-    }).compileComponents();
-  }));
+  let shallow: Shallow<AppComponent>;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    shallow = new Shallow(AppComponent, AppModule);
+  });
+
+  it('should match snapshot', async () => {
+    const { fixture } = await shallow.render();
+
+    expect(fixture).toMatchSnapshot();
   });
 });

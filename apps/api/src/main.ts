@@ -1,19 +1,17 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 
-async function bootstrap() {
+const DEFAULT_PORT = 80;
+
+async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-  const port = process.env.PORT || 80;
+  const port = process.env.PORT || DEFAULT_PORT;
+
   await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port);
+    Logger.log(`Listening at http://localhost:${port}`);
   });
 }
 
-bootstrap();
+bootstrap().then(() => Logger.log('Bootstrap done!'));
