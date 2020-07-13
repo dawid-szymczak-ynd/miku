@@ -43,6 +43,9 @@
     },
     "tools": {
       "tags": ["tools"]
+    },
+    "miku-credit-front-homepage": {
+      "tags": ["mikuops:miku-credit-front", "type:feature"]
     }
   }
 }

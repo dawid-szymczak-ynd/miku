@@ -16,7 +16,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@miku-credit/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@miku-credit/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@miku-credit/miku-credit-front/homepage": [
+        "libs/miku-credit-front/homepage/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

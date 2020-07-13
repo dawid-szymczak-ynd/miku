@@ -10,7 +10,15 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([
+      {
+        path: '',
+        loadChildren: () =>
+          import('@miku-credit/miku-credit-front/homepage').then(
+            (module) => module.MikuCreditFrontHomepageModule
+          ),
+      },
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent],
