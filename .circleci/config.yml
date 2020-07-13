@@ -94,13 +94,15 @@ jobs:
     executor: aws-cli/default
     steps:
       - setup
+      - restore_npm_cache
+      - restore_cypress_cache
+      - npm_install
       - aws-cli/setup
       - run:
           name: Push Docker Images
           command: |
-            eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+            eval $(aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_BASE)
             npm run push-images
-
 
 orbs:
   aws-cli: circleci/aws-cli@1.2.1
