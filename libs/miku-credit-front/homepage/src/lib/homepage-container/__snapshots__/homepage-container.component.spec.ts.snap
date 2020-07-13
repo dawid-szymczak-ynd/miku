@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomepageContainerComponent should match snapshot 1`] = `
+<ng-component>
+  <miku-credit-homepage-container>
+    <p>
+      homepage-container works!
+    </p>
+  </miku-credit-homepage-container>
+</ng-component>
+`;
