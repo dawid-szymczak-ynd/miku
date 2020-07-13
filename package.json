@@ -77,6 +77,20 @@
     "@nrwl/cypress": "9.5.1",
     "@nrwl/node": "9.5.1",
     "@nestjs/schematics": "^7.0.0",
-    "@nestjs/testing": "^7.0.0"
+    "@nestjs/testing": "^7.0.0",
+    "husky": "^4.2.5",
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "nx format:check --uncommitted",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "standard-version": {
+    "scripts": {
+      "postchangelog": "nx format:write --uncommitted && git add CHANGELOG.md"
+    }
   }
 }
