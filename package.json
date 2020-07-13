@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
-    "affected:apps": "nx affected:apps",
+    "affected:apps": "nx affected:apps --plain",
     "affected:apps:all": "nx affected:apps --plain --all",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build --prod --parallel --maxParallel=5",
