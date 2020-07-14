@@ -44,6 +44,9 @@
     },
     "miku-credit-front-homepage": {
       "tags": ["mikuops:miku-credit-front", "type:feature"]
+    },
+    "miku-credit-front-sell-soul": {
+      "tags": ["mikuops:miku-credit-front", "type:feature"]
     }
   }
 }

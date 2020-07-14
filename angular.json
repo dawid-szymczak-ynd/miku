@@ -355,6 +355,38 @@
           "style": "scss"
         }
       }
+    },
+    "miku-credit-front-sell-soul": {
+      "projectType": "library",
+      "root": "libs/miku-credit-front/sell-soul",
+      "sourceRoot": "libs/miku-credit-front/sell-soul/src",
+      "prefix": "miku-credit",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/miku-credit-front/sell-soul/tsconfig.lib.json",
+              "libs/miku-credit-front/sell-soul/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/miku-credit-front/sell-soul/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/miku-credit-front/sell-soul/jest.config.js",
+            "tsConfig": "libs/miku-credit-front/sell-soul/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/miku-credit-front/sell-soul/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

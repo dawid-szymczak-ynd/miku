@@ -17,9 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@miku-credit/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@miku-credit/miku-credit-front/homepage": [
-        "libs/miku-credit-front/homepage/src/index.ts"
-      ]
+      "@miku-credit/miku-credit-front/homepage": ["libs/miku-credit-front/homepage/src/index.ts"],
+      "@miku-credit/miku-credit-front/sell-soul": ["libs/miku-credit-front/sell-soul/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
