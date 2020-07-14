@@ -27,7 +27,8 @@ spec:
   {{- end }}
 {{- end }}
   rules:
-    - http:
+    - host: {{ .Values.ingress.host }}
+      http:
         paths:
           - path: {{ .Values.ingress.path }}
             backend:
