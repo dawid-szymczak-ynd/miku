@@ -1,3 +1,7 @@
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { Shallow } from 'shallow-render';
 
 import { AppComponent } from './app.component';
@@ -11,7 +15,19 @@ describe('AppComponent', () => {
   });
 
   it('should match snapshot', async () => {
-    const { fixture } = await shallow.render();
+    const { fixture } = await shallow
+      .replaceModule(
+        RouterModule,
+        RouterTestingModule.withRoutes([
+          {
+            path: '',
+            redirectTo: '/test',
+            pathMatch: 'full',
+          },
+        ])
+      )
+      .replaceModule(BrowserAnimationsModule, NoopAnimationsModule)
+      .render();
 
     expect(fixture).toMatchSnapshot();
   });

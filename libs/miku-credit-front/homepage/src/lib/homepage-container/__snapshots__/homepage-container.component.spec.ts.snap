@@ -3,9 +3,83 @@
 exports[`HomepageContainerComponent should match snapshot 1`] = `
 <ng-component>
   <miku-credit-homepage-container>
-    <p>
-      homepage-container works!
-    </p>
+    <div
+      class="container"
+    >
+      <section
+        class="container__right-side"
+      >
+        <div
+          class="container__right-side__header"
+        >
+          <button
+            class="container__right-side__header__cta"
+            mat-stroked-button=""
+          >
+             Menu 
+          </button>
+          <mat-menu
+            xposition="before"
+          >
+            <button
+              mat-menu-item=""
+              routerlink="/sell-soul/login"
+            >
+              Log in
+            </button>
+          </mat-menu>
+        </div>
+        <div
+          class="container__right-side__body"
+        >
+          <div>
+            <h1
+              class="container__right-side__body__title"
+            >
+              Let us help!
+            </h1>
+            <p
+              class="container__right-side__body__paragraph"
+            >
+               We will love to help you with taking a loan! Money will appear on your account even in 15 minutes, and it will cost only your soul ;) 
+            </p>
+            <button
+              class="container__right-side__body__cta"
+              data-cy="mainCTA"
+              mat-flat-button=""
+              routerlink="/sell-soul"
+            >
+               Take your money! 
+            </button>
+          </div>
+        </div>
+        <div
+          class="container__right-side__footer"
+        />
+      </section>
+      <section
+        class="container__left-side"
+      >
+        <div>
+          <mat-icon
+            class="container__left-side__logo"
+          >
+            account_balance
+          </mat-icon>
+          <h1
+            class="container__left-side__title"
+            data-cy="leftTitle"
+          >
+            Miku Credit
+          </h1>
+          <h2
+            class="container__left-side__subtitle"
+          >
+            Make us fat cat!
+          </h2>
+        </div>
+      </section>
+    </div>
   </miku-credit-homepage-container>
 </ng-component>
 `;
