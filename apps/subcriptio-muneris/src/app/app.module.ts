@@ -1,6 +1,5 @@
 import { SubcriptioMunerisCommonModule } from '@miku-credit/subcriptio-muneris/common';
 import { Module } from '@nestjs/common';
-import { TerminusModule } from '@nestjs/terminus';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -14,7 +13,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.POSTGRESQL_DATABASE,
       autoLoadEntities: true,
     }),
-    TerminusModule,
     SubcriptioMunerisCommonModule,
   ],
   controllers: [],
