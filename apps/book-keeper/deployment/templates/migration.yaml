@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: flyway
-          image: boxfuse/flyway:5.2.4
+          image: flyway/flyway
           args:
             - info
             - repair
@@ -15,7 +15,7 @@ spec:
             - info
           env:
             - name: FLYWAY_URL
-              value: jdbc:postgresql://postgresql.persistance:5432/postgres
+              value: jdbc:postgresql://postgresql.persistance:5432
             - name: FLYWAY_USER
               value: postgres
             - name: FLYWAY_PASSWORD
