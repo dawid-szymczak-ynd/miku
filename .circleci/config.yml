@@ -85,6 +85,7 @@ jobs:
       - run:
           name: Build apps
           command: npm run affected-operation -- --type=build
+          no_output_timeout: 30m
       - persist_to_workspace:
           root: ..
           paths:
@@ -104,6 +105,7 @@ jobs:
       - run:
           name: Login into ECR & Push Docker Images
           command: aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_BASE && npm run push-images
+          no_output_timeout: 30m
 
 orbs:
   aws-cli: circleci/aws-cli@1.2.1
