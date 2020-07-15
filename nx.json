@@ -47,6 +47,24 @@
     },
     "miku-credit-front-sell-soul": {
       "tags": ["mikuops:miku-credit-front", "type:feature"]
+    },
+    "book-keeper-common": {
+      "tags": ["mikuops:book-keeper", "type:common"]
+    },
+    "book-keeper-calculation": {
+      "tags": ["mikuops:book-keeper", "type:feature"]
+    },
+    "subcriptio-muneris-common": {
+      "tags": ["mikuops:subcriptio-muneris", "type:common"]
+    },
+    "api-common": {
+      "tags": ["mikuops:api-gateway", "type:common"]
+    },
+    "subcriptio-muneris-user": {
+      "tags": ["mikuops:subcriptio-muneris", "type:feature"]
+    },
+    "api-auth": {
+      "tags": ["mikuops:api-gateway", "type:feature"]
     }
   }
 }
