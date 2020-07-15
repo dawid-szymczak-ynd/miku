@@ -1,4 +1,5 @@
 import { SubcriptioMunerisCommonModule } from '@miku-credit/subcriptio-muneris/common';
+import { SubcriptioMunerisUserModule } from '@miku-credit/subcriptio-muneris/user';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -14,6 +15,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
     }),
     SubcriptioMunerisCommonModule,
+    SubcriptioMunerisUserModule,
   ],
   controllers: [],
   providers: [],
