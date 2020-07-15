@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sql-config-map
+data:
+  V1_1__create_user.sql: |
+    CREATE USER ${username} WITH
+      LOGIN
+      NOSUPERUSER
+      NOCREATEDB
+      NOCREATEROLE
+      INHERIT
+      NOREPLICATION
+      CONNECTION LIMIT -1
+      ENCRYPTED PASSWORD '${password}';
+  V1_2__create_db.sql: |
+    CREATE DATABASE ${username} WITH
+      OWNER = ${username}
+      ENCODING  = 'UTF8'
+      CONNECTION LIMIT = -1;
+  V1_3__grant_privileges.sql: |
+    GRANT ALL ON DATABASE ${username} TO ${username}
+  V1_4__create_table.sql: |
+    create table loans_type (
+      id serial primary key,
+      name varchar(100) not null
+    );
+    create table loans (
+      id serial primary key,
+      type_id serial,
+      name varchar(100) not null,
+      max_length integer not null,
+      min_length integer not null,
+      max_amount integer not null,
+      min_amount integer not null,
+      rate NUMERIC(7, 4) not null,
+      recuired_scoring NUMERIC(5, 2) not null,
+      foreign key (type_id) references loans_type (id) on delete cascade
+    );
+  V1_5__insert_data.sql: |
+    insert into loans_type (name) values ('housing');
+    insert into loans (type_id, name, max_length, min_length, max_amount, min_amount, rate, recuired_scoring) values (1, 'dream house', 480, 36, 10000000, 100000, 0.035, 60);
