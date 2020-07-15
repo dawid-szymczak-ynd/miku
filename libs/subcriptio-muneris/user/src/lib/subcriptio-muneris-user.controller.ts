@@ -14,8 +14,8 @@ export class SubcriptioMunerisUserController {
     return this.subcriptioMunerisUserService.create(userData).then((insertResult) => insertResult.raw);
   }
 
-  @MessagePattern('user.findById')
-  public findUser(@Payload() { id }: FindUserByIdMessage): Promise<UserInterface> {
-    return this.subcriptioMunerisUserService.findOne({ id });
+  @MessagePattern('user.findByEmail')
+  public findUser(@Payload() { email }: FindUserByIdMessage): Promise<UserInterface> {
+    return this.subcriptioMunerisUserService.findOne({ email });
   }
 }

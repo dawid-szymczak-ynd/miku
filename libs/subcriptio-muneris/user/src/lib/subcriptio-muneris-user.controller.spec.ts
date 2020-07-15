@@ -24,7 +24,7 @@ describe('SubcriptioMunerisUserController', () => {
   });
 
   it('should have findUser() which returns found user', async () => {
-    const result = await controller.findUser({ id: 1 });
+    const result = await controller.findUser({ email: 'mockEmail' });
 
     expect(result).toEqual({ id: 1 });
   });
