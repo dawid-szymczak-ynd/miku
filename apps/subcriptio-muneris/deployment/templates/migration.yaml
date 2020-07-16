@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: subcriptio-muneris-migration-job
 spec:
+  activeDeadlineSeconds: 120
   template:
     spec:
       containers:
