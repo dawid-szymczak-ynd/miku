@@ -57,9 +57,11 @@ describe('ApiAuthService', () => {
     expect(result$).toBeObservable(expected$);
     expect(send).toBeCalledWith('user.findByEmail', { email: 'mockEmail' });
     expect(send).toBeCalledWith('user.create', {
-      email: 'mockEmail',
-      name: 'mockName',
-      scoring: 100,
+      userData: {
+        email: 'mockEmail',
+        name: 'mockName',
+        scoring: 100,
+      },
     });
   });
 });
