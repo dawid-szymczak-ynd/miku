@@ -1,5 +1,7 @@
+import { execSync } from 'child_process';
+
 import { OperationName } from './enums';
-import { execAsync, getArgs, getBase, getEnvs, runner } from './helpers';
+import { getArgs, getBase, getEnvs, runner } from './helpers';
 
 export async function affectedOperation(): Promise<void> {
   const { tag, branch, head } = getEnvs(['tag', 'branch', 'head']);
@@ -11,8 +13,8 @@ export async function affectedOperation(): Promise<void> {
       ? `npm run affected:${type} -- --base=${base} --head=${head} ${e2eKey}`
       : `npm run format:check -- --base=${base} --head=${head}`;
 
-  return execAsync(command).then(() => {
-    console.log(`${command} executed correctly`);
+  execSync(command, {
+    stdio: [process.stdin, process.stdout, process.stderr],
   });
 }
 
