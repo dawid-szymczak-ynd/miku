@@ -8,7 +8,7 @@ describe('BookKeeperCalculationController', () => {
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [BookKeeperCalculationService],
+      providers: [{ provide: BookKeeperCalculationService, useValue: {} }],
       controllers: [BookKeeperCalculationController],
     }).compile();
 
