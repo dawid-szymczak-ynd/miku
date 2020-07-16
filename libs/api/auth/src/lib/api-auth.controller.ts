@@ -1,8 +1,8 @@
-import { Controller, Get, Inject, OnModuleInit, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject, OnModuleInit, Res, UseGuards } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 
-import { Request } from 'express';
+import { Response } from 'express';
 
 @Controller('auth')
 export class ApiAuthController implements OnModuleInit {
@@ -15,13 +15,11 @@ export class ApiAuthController implements OnModuleInit {
 
   @Get()
   @UseGuards(AuthGuard('google'))
-  public async googleAuth(): Promise<void> {
-    return;
-  }
+  public googleAuth(): void {}
 
   @Get('redirect')
   @UseGuards(AuthGuard('google'))
-  public googleAuthRedirect(@Req() req: Request): Express.User {
-    return req?.user;
+  public googleAuthRedirect(@Res() res: Response): void {
+    res.redirect('/sell-soul/first-step');
   }
 }

@@ -1,3 +1,4 @@
+import { UnauthorizedException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { cold } from '@nrwl/angular/testing';
 
@@ -51,7 +52,7 @@ describe('GoogleStrategy', () => {
       name: { givenName: 'mockName' },
       emails: [{ value: 'mockEmail' }],
     });
-    expect(mockDone).toBeCalledWith(null, { id: 1, accessToken: 'mockToken' });
+    expect(mockDone).toBeCalledWith(null, { id: 1, accessToken: 'mockToken', refreshToken: 'mockToken' });
   });
 
   it('should have validate which call verifyFunction with error when authorization will be failure', () => {
@@ -70,13 +71,13 @@ describe('GoogleStrategy', () => {
       } as Profile,
       mockDone
     );
-    const expected$ = cold('#', null, new Error('Connection error'));
+    const expected$ = cold('#', null, new UnauthorizedException(new Error('Connection error')));
 
     expect(result$).toBeObservable(expected$);
     expect(authorizeUser).toBeCalledWith({
       name: { givenName: 'mockName' },
       emails: [{ value: 'mockEmail' }],
     });
-    expect(mockDone).toBeCalledWith(new Error('Connection error'), { email: 'mockEmail' });
+    expect(mockDone).toBeCalledWith(new UnauthorizedException(new Error('Connection error')), { email: 'mockEmail' });
   });
 });
