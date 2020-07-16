@@ -55,6 +55,8 @@ spec:
               secretKeyRef:
                 name: book-keeper-migration-secret
                 key: password
+          - name: KAFKA_URL
+            value: kafka.persistance:9092
           ports:
             - name: http
               containerPort: 80

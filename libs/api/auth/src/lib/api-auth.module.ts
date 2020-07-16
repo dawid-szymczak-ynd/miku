@@ -15,7 +15,7 @@ import { GoogleStrategy } from './google.strategy';
         options: {
           client: {
             clientId: 'api-gateway',
-            brokers: ['kafka.persitance:9092'],
+            brokers: [process.env.KAFKA_URL],
           },
           consumer: {
             groupId: 'user-operations',

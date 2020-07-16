@@ -60,6 +60,8 @@ spec:
                 secretKeyRef:
                   name: api-gateway-google-secret
                   key: secret
+            - name: KAFKA_URL
+              value: kafka.persistance:9092
           ports:
             - name: http
               containerPort: 80

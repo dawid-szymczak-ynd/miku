@@ -15,7 +15,7 @@ async function bootstrap(): Promise<void> {
     options: {
       client: {
         clientId: 'book-keeper',
-        brokers: ['kafka.persitance:9092'],
+        brokers: [process.env.KAFKA_URL],
       },
       consumer: {
         groupId: 'loan-calculation',

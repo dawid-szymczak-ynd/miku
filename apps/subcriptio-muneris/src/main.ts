@@ -15,7 +15,7 @@ async function bootstrap(): Promise<void> {
     options: {
       client: {
         clientId: 'subcriptio-muneris',
-        brokers: ['kafka.persitance:9092'],
+        brokers: [process.env.KAFKA_URL],
       },
       consumer: {
         groupId: 'user-operations',
