@@ -7,8 +7,16 @@ import { SellSoulContainerComponent } from './sell-soul-container/sell-soul-cont
 @NgModule({
   imports: [
     CommonModule,
-
-    RouterModule.forChild([{ path: '', pathMatch: 'full', component: SellSoulContainerComponent }]),
+    RouterModule.forChild([
+      {
+        path: ':status',
+        component: SellSoulContainerComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'login',
+      },
+    ]),
   ],
   declarations: [SellSoulContainerComponent],
 })
