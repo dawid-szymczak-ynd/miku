@@ -7,3 +7,11 @@ export interface FindUserByIdMessage {
 export interface CreateUserMessage {
   userData: UserInterface;
 }
+
+export interface CalculatePaybackPlanMessage {
+  loanId: number;
+  amount: number;
+  months: number;
+  startDate: string;
+  scoring: number;
+}
