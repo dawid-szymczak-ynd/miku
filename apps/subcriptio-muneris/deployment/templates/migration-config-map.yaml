@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: subcriptio-muneris-migration-config-map
 data:
-  username: subcriptio-muneris
+  username: subcriptiomuneris
   database-host: postgresql.persistance
   database-port: '5432'
   driver-class-name: org.postgresql.Driver
-  url: jdbc:postgresql://postgresql.persistance:5432/subcriptio-muneris
+  url: jdbc:postgresql://postgresql.persistance:5432/subcriptiomuneris
