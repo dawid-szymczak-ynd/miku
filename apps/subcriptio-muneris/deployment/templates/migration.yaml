@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migration-job
+  name: subcriptio-muneris-migration-job
 spec:
   template:
     spec:
@@ -21,19 +21,19 @@ spec:
             - name: FLYWAY_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: database-secret
+                  name: subcriptio-muneris-database-secret
                   key: password
             - name: FLYWAY_PLACEHOLDER_REPLACEMENT
               value: "true"
             - name: FLYWAY_PLACEHOLDERS_USERNAME
               valueFrom:
                 configMapKeyRef:
-                  name: migration-config-map
+                  name: subcriptio-muneris-migration-config-map
                   key: username
             - name: FLYWAY_PLACEHOLDERS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: migration-secret
+                  name: subcriptio-muneris-migration-secret
                   key: password
           volumeMounts:
             - mountPath: /flyway/sql
@@ -41,5 +41,5 @@ spec:
       volumes:
         - name: sql
           configMap:
-            name: sql-config-map
+            name: subcriptio-muneris-sql-config-map
       restartPolicy: Never

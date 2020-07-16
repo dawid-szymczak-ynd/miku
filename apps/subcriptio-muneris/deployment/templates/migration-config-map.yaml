@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: migration-config-map
+  name: subcriptio-muneris-migration-config-map
 data:
   username: subcriptio-muneris
   database-host: postgresql.persistance

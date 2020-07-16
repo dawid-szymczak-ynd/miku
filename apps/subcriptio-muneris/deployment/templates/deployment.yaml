@@ -33,27 +33,27 @@ spec:
           - name: POSTGRESQL_USERNAME
             valueFrom:
               configMapKeyRef:
-                name: migration-config-map
+                name: subcriptio-muneris-migration-config-map
                 key: username
           - name: POSTGRESQL_DATABASE
             valueFrom:
               configMapKeyRef:
-                name: migration-config-map
+                name: subcriptio-muneris-migration-config-map
                 key: username
           - name: POSTGRESQL_HOST
             valueFrom:
               configMapKeyRef:
-                name: migration-config-map
+                name: subcriptio-muneris-migration-config-map
                 key: database-host
           - name: POSTGRESQL_PORT
             valueFrom:
               configMapKeyRef:
-                name: migration-config-map
+                name: subcriptio-muneris-migration-config-map
                 key: database-port
           - name: POSTGRESQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: migration-secret
+                name: subcriptio-muneris-migration-secret
                 key: password
           ports:
             - name: http

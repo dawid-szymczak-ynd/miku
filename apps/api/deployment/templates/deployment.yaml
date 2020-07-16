@@ -33,32 +33,32 @@ spec:
             - name: REDIS_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: redis-config-map
+                  name: api-gateway-redis-config-map
                   key: redis-host
             - name: REDIS_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: redis-config-map
+                  name: api-gateway-redis-config-map
                   key: redis-port
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: redis-secret
+                  name: api-gateway-redis-secret
                   key: password
             - name: SESSION_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: session-secret
+                  name: api-gateway-session-secret
                   key: secret
             - name: GOOGLE_CLIENT_ID
               valueFrom:
                 secretKeyRef:
-                  name: google-secret
+                  name: api-gateway-google-secret
                   key: client-id
             - name: GOOGLE_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: google-secret
+                  name: api-gateway-google-secret
                   key: secret
           ports:
             - name: http

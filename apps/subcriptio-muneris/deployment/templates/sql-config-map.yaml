@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: sql-config-map
+  name: subcriptio-muneris-sql-config-map
 data:
   V1_1__create_user.sql: |
     CREATE USER ${username} WITH

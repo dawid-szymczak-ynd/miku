@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migration-job
+  name: book-keeper-migration-job
 spec:
   template:
     spec:
@@ -21,19 +21,19 @@ spec:
             - name: FLYWAY_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: database-secret
+                  name: book-keeper-database-secret
                   key: password
             - name: FLYWAY_PLACEHOLDER_REPLACEMENT
               value: "true"
             - name: FLYWAY_PLACEHOLDERS_USERNAME
               valueFrom:
                 configMapKeyRef:
-                  name: migration-config-map
+                  name: book-keeper-migration-config-map
                   key: username
             - name: FLYWAY_PLACEHOLDERS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: migration-secret
+                  name: book-keeper-migration-secret
                   key: password
           volumeMounts:
             - mountPath: /flyway/sql
@@ -41,5 +41,5 @@ spec:
       volumes:
         - name: sql
           configMap:
-            name: sql-config-map
+            name: book-keeper-sql-config-map
       restartPolicy: Never
