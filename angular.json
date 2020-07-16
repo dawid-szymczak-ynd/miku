@@ -147,7 +147,8 @@
                   "replace": "apps/api/src/environments/environment.ts",
                   "with": "apps/api/src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "maxWorkers": 1
             }
           }
         },
@@ -222,7 +223,8 @@
                   "replace": "apps/book-keeper/src/environments/environment.ts",
                   "with": "apps/book-keeper/src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "maxWorkers": 1
             }
           }
         },
@@ -274,7 +276,8 @@
                   "replace": "apps/subcriptio-muneris/src/environments/environment.ts",
                   "with": "apps/subcriptio-muneris/src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "maxWorkers": 1
             }
           }
         },
