@@ -2,7 +2,7 @@ export interface Payments {
   date: string;
   base: number;
   interest: number;
-  index: number;
+  balance: number;
 }
 
 export interface PaybackPlanInterface {
