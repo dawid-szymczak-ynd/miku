@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 
 import { OAuth2Strategy, Profile, VerifyFunction } from 'passport-google-oauth';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ApiAuthService } from './api-auth.service';
@@ -18,16 +18,22 @@ export class GoogleStrategy extends PassportStrategy(OAuth2Strategy, 'google') {
     });
   }
 
-  public validate(accessToken: string, refreshToken: string, profile: Profile, done: VerifyFunction): Observable<void> {
-    const { emails } = profile;
+  public async validate(
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    done: VerifyFunction
+  ): Promise<void> {
+    return await this.authService
+      .authorizeUser(profile)
+      .pipe(
+        map((user) => done(null, { ...user, accessToken, refreshToken })),
+        catchError((error) => {
+          done(new UnauthorizedException(error), null);
 
-    return this.authService.authorizeUser(profile).pipe(
-      map((user) => done(null, { ...user, accessToken, refreshToken })),
-      catchError((error) => {
-        done(new UnauthorizedException(error), { email: emails[0].value });
-
-        return throwError(new UnauthorizedException(error));
-      })
-    );
+          return throwError(new UnauthorizedException(error));
+        })
+      )
+      .toPromise();
   }
 }
