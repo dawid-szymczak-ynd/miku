@@ -40,6 +40,7 @@
     "@nestjs/terminus": "^7.0.1",
     "@nestjs/typeorm": "^7.1.0",
     "connect-redis": "^5.0.0",
+    "decimal.js": "^10.2.0",
     "express-session": "^1.17.1",
     "kafkajs": "^1.12.0",
     "passport": "^0.4.1",
