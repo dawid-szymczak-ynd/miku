@@ -14,7 +14,7 @@
     "affected:apps": "nx affected:apps --plain",
     "affected:apps:all": "nx affected:apps --plain --all",
     "affected:libs": "nx affected:libs",
-    "affected:build": "nx affected:build --prod --parallel --maxParallel=2",
+    "affected:build": "nx affected:build --prod",
     "affected:e2e": "nx affected:e2e --prod --headless",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint --parallel --maxParallel=5",

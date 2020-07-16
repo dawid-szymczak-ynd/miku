@@ -1,8 +1,7 @@
-import { UserInterface } from '@miku-credit/api-interfaces';
+import { CreateUserMessage, FindUserByIdMessage, UserInterface } from '@miku-credit/api-interfaces';
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
-import { CreateUserMessage, FindUserByIdMessage } from './message.interface';
 import { SubcriptioMunerisUserService } from './subcriptio-muneris-user.service';
 
 @Controller('subcriptio-muneris-user')
