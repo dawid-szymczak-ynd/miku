@@ -1,8 +1,5 @@
 {
-  "rulesDirectory": [
-    "node_modules/@nrwl/workspace/src/tslint",
-    "node_modules/codelyzer"
-  ],
+  "rulesDirectory": ["node_modules/@nrwl/workspace/src/tslint", "node_modules/codelyzer"],
   "rules": {
     "max-line-length": [true, 120],
     "array-type": [true, "array"],
@@ -24,12 +21,7 @@
     "member-ordering": [
       true,
       {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
+        "order": ["static-field", "instance-field", "static-method", "instance-method"]
       }
     ],
     "newline-before-return": true,
@@ -98,13 +90,7 @@
     "radix": true,
     "restrict-plus-operands": true,
     "triple-equals": [true, "allow-null-check"],
-    "typedef": [
-      true,
-      "call-signature",
-      "parameter",
-      "property-declaration",
-      "member-variable-declaration"
-    ],
+    "typedef": [true, "call-signature", "parameter", "property-declaration", "member-variable-declaration"],
     "unified-signatures": true,
     "variable-name": false,
     "nx-enforce-module-boundaries": [
@@ -114,19 +100,11 @@
         "depConstraints": [
           {
             "sourceTag": "type:app",
-            "onlyDependOnLibsWithTags": [
-              "type:feature",
-              "type:data-providing",
-              "type:common"
-            ]
+            "onlyDependOnLibsWithTags": ["type:feature", "type:data-providing", "type:common"]
           },
           {
             "sourceTag": "type:feature",
-            "onlyDependOnLibsWithTags": [
-              "type:user-interface",
-              "type:data-providing",
-              "type:common"
-            ]
+            "onlyDependOnLibsWithTags": ["type:user-interface", "type:data-providing", "type:common"]
           },
           {
             "sourceTag": "type:user-interface",
@@ -146,31 +124,19 @@
           },
           {
             "sourceTag": "mikuops:miku-credit-front",
-            "onlyDependOnLibsWithTags": [
-              "mikuops:miku-credit-front",
-              "mikuops:shared"
-            ]
+            "onlyDependOnLibsWithTags": ["mikuops:miku-credit-front", "mikuops:shared"]
           },
           {
             "sourceTag": "mikuops:api-gateway",
-            "onlyDependOnLibsWithTags": [
-              "mikuops:api-gateway",
-              "mikuops:shared"
-            ]
+            "onlyDependOnLibsWithTags": ["mikuops:api-gateway", "mikuops:shared"]
           },
           {
             "sourceTag": "mikuops:book-keeper",
-            "onlyDependOnLibsWithTags": [
-              "mikuops:book-keeper",
-              "mikuops:shared"
-            ]
+            "onlyDependOnLibsWithTags": ["mikuops:book-keeper", "mikuops:shared"]
           },
           {
             "sourceTag": "mikuops:subcriptio-muneris",
-            "onlyDependOnLibsWithTags": [
-              "mikuops:subcriptio-muneris",
-              "mikuops:shared"
-            ]
+            "onlyDependOnLibsWithTags": ["mikuops:subcriptio-muneris", "mikuops:shared"]
           }
         ],
         "enforceBuildableLibDependency": true
