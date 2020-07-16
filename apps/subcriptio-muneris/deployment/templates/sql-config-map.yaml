@@ -4,20 +4,9 @@ metadata:
   name: subcriptio-muneris-sql-config-map
 data:
   V1_1__create_user.sql: |
-    CREATE USER ${username} WITH
-      LOGIN
-      NOSUPERUSER
-      NOCREATEDB
-      NOCREATEROLE
-      INHERIT
-      NOREPLICATION
-      CONNECTION LIMIT -1
-      ENCRYPTED PASSWORD '${password}';
+    CREATE ROLE ${username} PASSWORD '${password}' LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT;
   V1_2__create_db.sql: |
-    CREATE DATABASE ${username} WITH
-      OWNER = ${username}
-      ENCODING  = 'UTF8'
-      CONNECTION LIMIT = -1;
+    CREATE DATABASE ${username} WITH OWNER = ${username} ENCODING  = 'UTF8';
   V1_3__grant_privileges.sql: |
     GRANT ALL ON DATABASE ${username} TO ${username}
   V1_4__create_table.sql: |
