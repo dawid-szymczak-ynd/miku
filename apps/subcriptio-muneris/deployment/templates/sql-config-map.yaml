@@ -3,14 +3,7 @@ kind: ConfigMap
 metadata:
   name: subcriptio-muneris-sql-config-map
 data:
-  V1_1__create_user.sql: |
-    CREATE ROLE ${username} PASSWORD '${password}' LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT;
-  V1_2__create_db.sql: |
-    CREATE DATABASE ${username} WITH OWNER = ${username} ENCODING  = 'UTF8';
-  V1_3__grant_privileges.sql: |
-    GRANT ALL ON DATABASE ${username} TO ${username}
-  V1_4__create_table.sql: |
-    \c ${username};
+  V1_1__create_table.sql: |
     create table users (
       id serial primary key,
       name varchar(100) not null,
