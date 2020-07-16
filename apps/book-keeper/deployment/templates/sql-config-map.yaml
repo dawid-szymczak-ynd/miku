@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: book-keeper-sql-config-map
 data:
-  V1_1__create_table.sql: |
+  V2_1__book_keeper_create_table.sql: |
     create table "loans_types" (
       id serial primary key,
       name varchar(100) not null
@@ -19,6 +19,6 @@ data:
       rate NUMERIC(7, 4) not null,
       recuired_scoring NUMERIC(5, 2) not null
     );
-  V1_2__insert_data.sql: |
+  V2_2__book_keeper_insert_data.sql: |
     insert into "loans_types" values (1, 'housing');
     insert into loans values (1, 1, 'dream house', 480, 36, 10000000, 100000, 0.035, 60);

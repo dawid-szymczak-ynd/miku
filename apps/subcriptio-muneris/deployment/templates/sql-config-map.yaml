@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: subcriptio-muneris-sql-config-map
 data:
-  V1_1__create_table.sql: |
+  V2_1__subcriptio_muneris_create_table.sql: |
     create table users (
       id serial primary key,
       name varchar(100) not null,
