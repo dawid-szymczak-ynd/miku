@@ -10,6 +10,7 @@ data:
   V1_3__grant_privileges.sql: |
     GRANT ALL ON DATABASE ${username} TO ${username}
   V1_4__create_table.sql: |
+    \c ${username};
     create table "loans_types" (
       id serial primary key,
       name varchar(100) not null
@@ -26,5 +27,6 @@ data:
       recuired_scoring NUMERIC(5, 2) not null
     );
   V1_5__insert_data.sql: |
+    \c ${username};
     insert into "loans_types" values (1, 'housing');
-    insert into loans values (1, (SELECT id from "loans_types" WHERE name='housing'), 'dream house', 480, 36, 10000000, 100000, 0.035, 60);
+    insert into loans values (1, 1, 'dream house', 480, 36, 10000000, 100000, 0.035, 60);

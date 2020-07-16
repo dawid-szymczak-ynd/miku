@@ -10,9 +10,10 @@ data:
   V1_3__grant_privileges.sql: |
     GRANT ALL ON DATABASE ${username} TO ${username}
   V1_4__create_table.sql: |
+    \c ${username};
     create table users (
       id serial primary key,
       name varchar(100) not null,
-      email integer not null,
+      email varchar(100) not null,
       scoring NUMERIC(5, 2) not null
     );
