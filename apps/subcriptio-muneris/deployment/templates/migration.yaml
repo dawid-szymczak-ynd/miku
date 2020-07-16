@@ -16,7 +16,7 @@ spec:
             - info
           env:
             - name: FLYWAY_URL
-              value: jdbc:postgresql://postgresql.persistance:5432/subcriptiomuneris/
+              value: jdbc:postgresql://postgresql.persistance:5432/subcriptiomuneris
             - name: FLYWAY_USER
               value: subcriptiomuneris
             - name: FLYWAY_PASSWORD

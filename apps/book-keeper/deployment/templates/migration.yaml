@@ -16,7 +16,7 @@ spec:
             - info
           env:
             - name: FLYWAY_URL
-              value: jdbc:postgresql://postgresql.persistance:5432/bookkeeper/
+              value: jdbc:postgresql://postgresql.persistance:5432/bookkeeper
             - name: FLYWAY_USER
               value: bookkeeper
             - name: FLYWAY_PASSWORD
