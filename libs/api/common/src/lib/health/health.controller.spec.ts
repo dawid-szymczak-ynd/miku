@@ -2,10 +2,12 @@ import { HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { HealthController } from './health.controller';
+import { RedisHealthIndicator } from './redis-health.indicator';
 
 describe('Health Controller', () => {
   let controller: HealthController;
   let healthCheckService: HealthCheckService;
+  let redisHealthIndicator: RedisHealthIndicator;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -16,11 +18,13 @@ describe('Health Controller', () => {
           useValue: { check: jest.fn((arrayOfCb) => Promise.all(arrayOfCb.map((cb) => cb()))) },
         },
         { provide: TypeOrmHealthIndicator, useValue: { pingCheck: jest.fn(() => Promise.resolve({})) } },
+        { provide: RedisHealthIndicator, useValue: { isHealthy: jest.fn(() => ({ redis: { status: 'up' } })) } },
       ],
     }).compile();
 
     controller = module.get<HealthController>(HealthController);
     healthCheckService = module.get<HealthCheckService>(HealthCheckService);
+    redisHealthIndicator = module.get<RedisHealthIndicator>(RedisHealthIndicator);
   });
 
   it('should have liveness() which call HealthCheckService.check() with default indicator', () => {
@@ -43,7 +47,7 @@ describe('Health Controller', () => {
 
     expect(controller.readiness()).resolves.toEqual([
       {
-        default: {
+        redis: {
           status: 'up',
         },
       },
