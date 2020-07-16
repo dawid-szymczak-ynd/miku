@@ -51,13 +51,13 @@ function affectedAppsFormatter(output: string): string[] {
   return output
     .split('\n')
     [fixedOutputIndex].split(' ')
-    .filter(appName => appName !== '');
+    .filter((appName) => appName !== '');
 }
 
 export function getEnvs<T extends ArgsMapping>(keys: T[]): { [K in T]?: string } {
   const envsObject: { [K in T]?: string } = {};
 
-  keys.forEach(key => {
+  keys.forEach((key) => {
     if (!process.env[argsMapping[key]]) {
       throw new Error(`${argsMapping[key]} is not found in current environment.`);
     }
@@ -72,7 +72,7 @@ export function getArgs<T extends string>(keys: T[]): { [K in T]?: string } {
   const args = minimist(process.argv);
   const argsObject: { [K in T]?: string } = {};
 
-  keys.forEach(key => {
+  keys.forEach((key) => {
     if (!args[key]) {
       throw new Error(`${key.toUpperCase()} is required.`);
     }

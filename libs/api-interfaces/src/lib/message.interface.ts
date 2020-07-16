@@ -15,3 +15,8 @@ export interface CalculatePaybackPlanMessage {
   startDate: string;
   scoring: number;
 }
+
+export interface LoansGetChunkMessage {
+  take: number;
+  skip: number;
+}

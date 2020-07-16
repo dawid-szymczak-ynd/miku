@@ -8,10 +8,7 @@ describe('HomepageContainerComponent', () => {
   let shallow: Shallow<HomepageContainerComponent>;
 
   beforeEach(() => {
-    shallow = new Shallow(
-      HomepageContainerComponent,
-      MikuCreditFrontHomepageModule
-    );
+    shallow = new Shallow(HomepageContainerComponent, MikuCreditFrontHomepageModule);
   });
 
   it('should match snapshot', async () => {
