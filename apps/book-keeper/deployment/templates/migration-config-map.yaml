@@ -4,7 +4,7 @@ metadata:
   name: migration-config-map
 data:
   username: book-keeper
-  database-host: postgrsql.persistance
+  database-host: postgresql.persistance
   database-port: '5432'
   driver-class-name: org.postgresql.Driver
   url: jdbc:postgresql://postgresql.persistance:5432/book-keeper
