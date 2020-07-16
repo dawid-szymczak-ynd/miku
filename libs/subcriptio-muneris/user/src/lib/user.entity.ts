@@ -2,7 +2,7 @@ import { UserInterface } from '@miku-credit/api-interfaces';
 
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
-@Entity({ name: 'Users' })
+@Entity({ name: 'users' })
 @Unique(['name'])
 @Unique(['email'])
 export class User implements UserInterface {
