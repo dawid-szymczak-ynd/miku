@@ -537,6 +537,116 @@
           }
         }
       }
+    },
+    "api-payback": {
+      "root": "libs/api/payback",
+      "sourceRoot": "libs/api/payback/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/api/payback/tsconfig.lib.json", "libs/api/payback/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/api/payback/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/api/payback/jest.config.js",
+            "tsConfig": "libs/api/payback/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-loan": {
+      "root": "libs/api/loan",
+      "sourceRoot": "libs/api/loan/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/api/loan/tsconfig.lib.json", "libs/api/loan/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/api/loan/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/api/loan/jest.config.js",
+            "tsConfig": "libs/api/loan/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "miku-credit-front-payback": {
+      "projectType": "library",
+      "root": "libs/miku-credit-front/payback",
+      "sourceRoot": "libs/miku-credit-front/payback/src",
+      "prefix": "miku-credit",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/miku-credit-front/payback/tsconfig.lib.json",
+              "libs/miku-credit-front/payback/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/miku-credit-front/payback/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/miku-credit-front/payback/jest.config.js",
+            "tsConfig": "libs/miku-credit-front/payback/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/miku-credit-front/payback/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "miku-credit-front-loan": {
+      "projectType": "library",
+      "root": "libs/miku-credit-front/loan",
+      "sourceRoot": "libs/miku-credit-front/loan/src",
+      "prefix": "miku-credit",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/miku-credit-front/loan/tsconfig.lib.json",
+              "libs/miku-credit-front/loan/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/miku-credit-front/loan/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/miku-credit-front/loan/jest.config.js",
+            "tsConfig": "libs/miku-credit-front/loan/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/miku-credit-front/loan/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

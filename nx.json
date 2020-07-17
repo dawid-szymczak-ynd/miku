@@ -65,6 +65,18 @@
     },
     "api-auth": {
       "tags": ["mikuops:api-gateway", "type:feature"]
+    },
+    "api-payback": {
+      "tags": ["mikuops:api-gateway", "type:feature"]
+    },
+    "api-loan": {
+      "tags": ["mikuops:api-gateway", "type:feature"]
+    },
+    "miku-credit-front-payback": {
+      "tags": ["mikuops:miku-credit-front", "type:data-providing"]
+    },
+    "miku-credit-front-loan": {
+      "tags": ["mikuops:miku-credit-front", "type:data-providing"]
     }
   }
 }
