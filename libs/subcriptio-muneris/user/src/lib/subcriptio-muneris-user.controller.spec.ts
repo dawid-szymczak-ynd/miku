@@ -24,13 +24,15 @@ describe('SubcriptioMunerisUserController', () => {
   });
 
   it('should have findUser() which returns found user', async () => {
-    const result = await controller.findUser({ email: 'mockEmail' });
+    const result = await controller.findUser({ value: { email: 'mockEmail' } });
 
     expect(result).toEqual({ id: 1 });
   });
 
   it('should have createUser() which creates user and returns insert result', async () => {
-    const result = await controller.createUser({ userData: { email: 'mockEmail', name: 'mockName', scoring: 12 } });
+    const result = await controller.createUser({
+      value: { userData: { email: 'mockEmail', name: 'mockName', scoring: 12 } },
+    });
 
     expect(result).toEqual({ id: 2 });
   });

@@ -9,12 +9,12 @@ export class SubcriptioMunerisUserController {
   constructor(private readonly subcriptioMunerisUserService: SubcriptioMunerisUserService) {}
 
   @MessagePattern('user.create')
-  public createUser(@Payload() { userData }: CreateUserMessage): Promise<UserInterface> {
-    return this.subcriptioMunerisUserService.create(userData).then((insertResult) => insertResult.raw);
+  public createUser(@Payload() message: { value: CreateUserMessage }): Promise<UserInterface> {
+    return this.subcriptioMunerisUserService.create(message.value.userData).then((insertResult) => insertResult.raw);
   }
 
   @MessagePattern('user.findByEmail')
-  public findUser(@Payload() { email }: FindUserByIdMessage): Promise<UserInterface> {
-    return this.subcriptioMunerisUserService.findOne({ email });
+  public findUser(@Payload() message: { value: FindUserByIdMessage }): Promise<UserInterface> {
+    return this.subcriptioMunerisUserService.findOne({ email: message.value.email });
   }
 }
