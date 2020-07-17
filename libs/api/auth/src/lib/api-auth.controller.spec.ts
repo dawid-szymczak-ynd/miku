@@ -4,7 +4,6 @@ import { Test } from '@nestjs/testing';
 import { Response } from 'express';
 
 import { ApiAuthController } from './api-auth.controller';
-import { ApiAuthService } from './api-auth.service';
 
 describe('ApiAuthController', () => {
   let controller: ApiAuthController;
@@ -13,7 +12,6 @@ describe('ApiAuthController', () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
-        ApiAuthService,
         {
           provide: 'USER_SERVICE',
           useValue: {
