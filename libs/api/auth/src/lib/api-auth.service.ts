@@ -1,5 +1,5 @@
 import { CreateUserMessage, FindUserByIdMessage, UserInterface } from '@miku-credit/api-interfaces';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
 import { Profile } from 'passport';
@@ -15,6 +15,8 @@ export class ApiAuthService {
       .send<UserInterface, FindUserByIdMessage>('user.findByEmail', { email: emails[0].value })
       .pipe(
         switchMap((response) => {
+          Logger.log(response);
+
           if (response?.id) {
             return of(response);
           }

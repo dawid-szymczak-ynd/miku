@@ -1,9 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 
 import { OAuth2Strategy, Profile, VerifyFunction } from 'passport-google-oauth';
 import { throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { ApiAuthService } from './api-auth.service';
 
@@ -27,6 +27,7 @@ export class GoogleStrategy extends PassportStrategy(OAuth2Strategy, 'google') {
     return await this.authService
       .authorizeUser(profile)
       .pipe(
+        tap((user) => Logger.log(user)),
         map((user) => done(null, { ...user, accessToken, refreshToken })),
         catchError((error) => {
           done(new UnauthorizedException(error), null);
