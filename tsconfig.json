@@ -28,7 +28,8 @@
       "@miku-credit/api/payback": ["libs/api/payback/src/index.ts"],
       "@miku-credit/api/loan": ["libs/api/loan/src/index.ts"],
       "@miku-credit/miku-credit-front/payback": ["libs/miku-credit-front/payback/src/index.ts"],
-      "@miku-credit/miku-credit-front/loan": ["libs/miku-credit-front/loan/src/index.ts"]
+      "@miku-credit/miku-credit-front/loan": ["libs/miku-credit-front/loan/src/index.ts"],
+      "@miku-credit/miku-credit-front/user": ["libs/miku-credit-front/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

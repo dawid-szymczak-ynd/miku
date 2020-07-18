@@ -647,6 +647,38 @@
           "style": "scss"
         }
       }
+    },
+    "miku-credit-front-user": {
+      "projectType": "library",
+      "root": "libs/miku-credit-front/user",
+      "sourceRoot": "libs/miku-credit-front/user/src",
+      "prefix": "miku-credit",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/miku-credit-front/user/tsconfig.lib.json",
+              "libs/miku-credit-front/user/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/miku-credit-front/user/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/miku-credit-front/user/jest.config.js",
+            "tsConfig": "libs/miku-credit-front/user/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/miku-credit-front/user/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
