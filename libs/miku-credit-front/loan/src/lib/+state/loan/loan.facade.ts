@@ -11,6 +11,7 @@ import * as LoanSelectors from './loan.selectors';
 @Injectable()
 export class LoanFacade {
   public loaded$: Observable<boolean> = this.store.pipe(select(LoanSelectors.getLoanLoaded));
+  public error$: Observable<Error> = this.store.pipe(select(LoanSelectors.getLoanError));
   public allLoans$: Observable<LoanInterface[]> = this.store.pipe(select(LoanSelectors.getAllLoans));
   public selectedLoan$: Observable<LoanInterface> = this.store.pipe(select(LoanSelectors.getSelected));
   public currentPage$: Observable<number> = this.store.pipe(select(LoanSelectors.getCurrentPage));

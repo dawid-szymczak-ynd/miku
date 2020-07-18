@@ -73,11 +73,13 @@ describe('LoanFacade', () => {
         let loaded = await readFirst(facade.loaded$);
         let currentPage = await readFirst(facade.currentPage$);
         let selectedLoan = await readFirst(facade.selectedLoan$);
+        let error = await readFirst(facade.error$);
 
         expect(allLoans.length).toBe(0);
         expect(loaded).toBe(false);
         expect(currentPage).toBe(-1);
         expect(selectedLoan).toBe(undefined);
+        expect(error).toBe(undefined);
 
         facade.loadLoansPage(0);
         facade.selectLoan(1);
@@ -86,11 +88,13 @@ describe('LoanFacade', () => {
         loaded = await readFirst(facade.loaded$);
         currentPage = await readFirst(facade.currentPage$);
         selectedLoan = await readFirst(facade.selectedLoan$);
+        error = await readFirst(facade.error$);
 
         expect(allLoans.length).toBe(1);
         expect(loaded).toBe(true);
         expect(currentPage).toBe(0);
         expect(selectedLoan).toEqual({ id: 1 });
+        expect(error).toBe(null);
 
         done();
       } catch (err) {
