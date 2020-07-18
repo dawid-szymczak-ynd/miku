@@ -66,5 +66,36 @@ describe('LoanFacade', () => {
         done.fail(err);
       }
     });
+
+    it('selectLoan() should set selectedId', async (done) => {
+      try {
+        let allLoans = await readFirst(facade.allLoans$);
+        let loaded = await readFirst(facade.loaded$);
+        let currentPage = await readFirst(facade.currentPage$);
+        let selectedLoan = await readFirst(facade.selectedLoan$);
+
+        expect(allLoans.length).toBe(0);
+        expect(loaded).toBe(false);
+        expect(currentPage).toBe(-1);
+        expect(selectedLoan).toBe(undefined);
+
+        facade.loadLoansPage(0);
+        facade.selectLoan(1);
+
+        allLoans = await readFirst(facade.allLoans$);
+        loaded = await readFirst(facade.loaded$);
+        currentPage = await readFirst(facade.currentPage$);
+        selectedLoan = await readFirst(facade.selectedLoan$);
+
+        expect(allLoans.length).toBe(1);
+        expect(loaded).toBe(true);
+        expect(currentPage).toBe(0);
+        expect(selectedLoan).toEqual({ id: 1 });
+
+        done();
+      } catch (err) {
+        done.fail(err);
+      }
+    });
   });
 });

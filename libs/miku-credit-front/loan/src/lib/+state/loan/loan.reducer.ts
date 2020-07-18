@@ -28,7 +28,8 @@ const loanReducer = createReducer(
   initialState,
   on(LoanActions.loadLoansPage, (state, { page }) => ({ ...state, loaded: false, error: null, currentPage: page })),
   on(LoanActions.loadLoansPageSuccess, (state, { loans }) => loanAdapter.setAll(loans, { ...state, loaded: true })),
-  on(LoanActions.loadLoansPageFailure, (state, { error }) => ({ ...state, error }))
+  on(LoanActions.loadLoansPageFailure, (state, { error }) => ({ ...state, error })),
+  on(LoanActions.selectLoan, (state, { loanId }) => ({ ...state, selectedId: loanId }))
 );
 
 export function reducer(state: State | undefined, action: Action): State {

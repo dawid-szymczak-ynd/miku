@@ -32,5 +32,12 @@ describe('Loan Reducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.error).toEqual(new Error());
     });
+
+    it('selectLoan should set selectedId', () => {
+      const action = LoanActions.selectLoan({ loanId: 0 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBe(0);
+    });
   });
 });

@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { loadLoansPage } from './loan.actions';
+import { loadLoansPage, selectLoan } from './loan.actions';
 import * as fromLoan from './loan.reducer';
 import * as LoanSelectors from './loan.selectors';
 
@@ -19,5 +19,9 @@ export class LoanFacade {
 
   public loadLoansPage(page: number): void {
     this.store.dispatch(loadLoansPage({ page }));
+  }
+
+  public selectLoan(loanId: number): void {
+    this.store.dispatch(selectLoan({ loanId }));
   }
 }
