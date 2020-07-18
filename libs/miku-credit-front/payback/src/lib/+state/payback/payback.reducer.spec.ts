@@ -20,6 +20,7 @@ describe('Payback Reducer', () => {
       expect(result.loaded).toBe(true);
       expect(result.error).toBe(null);
       expect(result.ids.length).toBe(1);
+      expect(result.selectedId).toBe(1);
     });
 
     it('calculatePaybackPlan should set error', () => {

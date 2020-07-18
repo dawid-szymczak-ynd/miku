@@ -26,7 +26,7 @@ const paybackReducer = createReducer(
   initialState,
   on(PaybackActions.calculatePaybackPlan, (state) => ({ ...state, loaded: false, error: null })),
   on(PaybackActions.calculatePaybackPlanSuccess, (state, { paybackPlan }) =>
-    paybackAdapter.addOne(paybackPlan, { ...state, loaded: true, error: null })
+    paybackAdapter.addOne(paybackPlan, { ...state, loaded: true, error: null, selectedId: paybackPlan.id })
   ),
   on(PaybackActions.calculatePaybackPlanFailure, (state, { error }) => ({ ...state, error }))
 );

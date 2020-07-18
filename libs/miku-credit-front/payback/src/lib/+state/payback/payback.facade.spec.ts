@@ -45,17 +45,21 @@ describe('PaybackFacade', () => {
       try {
         let allPaybackPlans = await readFirst(facade.allPaybackPlans$);
         let isLoaded = await readFirst(facade.loaded$);
+        let selectedPaybackPlan = await readFirst(facade.selectedPaybackPlan$);
 
         expect(allPaybackPlans.length).toBe(0);
         expect(isLoaded).toBe(false);
+        expect(selectedPaybackPlan).toBe(undefined);
 
         facade.calculatePaybackPlan({ scoring: 10, months: 10, loanId: 1, amount: 1000, startDate: '123' });
 
         allPaybackPlans = await readFirst(facade.allPaybackPlans$);
         isLoaded = await readFirst(facade.loaded$);
+        selectedPaybackPlan = await readFirst(facade.selectedPaybackPlan$);
 
         expect(allPaybackPlans.length).toBe(1);
         expect(isLoaded).toBe(true);
+        expect(selectedPaybackPlan).toEqual({ id: 1 });
 
         done();
       } catch (err) {
