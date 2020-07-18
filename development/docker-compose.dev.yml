@@ -1,0 +1,155 @@
+version: '3.7'
+services:
+  api:
+    build:
+      context: ../
+      dockerfile: ./development/Dockerfile.dev
+      args:
+        - PORT=80
+    command: ['api']
+    image: api-gateway
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=UnhEiwV9Iw
+      - SESSION_SECRET=secret
+      - GOOGLE_CLIENT_ID=830169605829-b7td2035q9pcj4auflh5v5sjkd77jdg5.apps.googleusercontent.com
+      - GOOGLE_SECRET=du2qo-6k3vMCZQfhaZ-0FcYg
+      - KAFKA_URL=kafka:9092
+      - NODE_ENV=development
+    links:
+      - redis:redis
+      - kafka:kafka
+    volumes:
+      - ./apps/api:/usr/src/miku-credit/apps/api
+      - ./libs/api:/usr/src/miku-credit/libs/api
+    ports:
+      - '3333:80'
+    depends_on:
+      - redis
+      - kafka
+  miku-credit-front:
+    build:
+      context: ../
+      dockerfile: ./development/Dockerfile.dev
+      args:
+        - PORT=4200
+    command: ['miku-credit-front']
+    image: miku-credit-front
+    environment:
+      - NODE_ENV=development
+    links:
+      - api:api
+    volumes:
+      - ./apps/miku-credit-front:/usr/src/miku-credit/apps/miku-credit-front
+      - ./libs/miku-credit-front:/usr/src/miku-credit/libs/miku-credit-front
+    ports:
+      - '4200:4200'
+    depends_on:
+      - api
+  book-keeper:
+    build:
+      context: ../
+      dockerfile: ./development/Dockerfile.dev
+      args:
+        - PORT=80
+    command: ['book-keeper']
+    image: book-keeper
+    environment:
+      - POSTGRESQL_HOST=db
+      - POSTGRESQL_PORT=5432
+      - POSTGRESQL_USERNAME=bookkeeper
+      - POSTGRESQL_PASSWORD=password
+      - POSTGRESQL_DATABASE=bookkeeper
+      - KAFKA_URL=kafka:9092
+      - NODE_ENV=development
+    links:
+      - db:db
+      - kafka:kafka
+    volumes:
+      - ./apps/book-keeper:/usr/src/miku-credit/apps/book-keeper
+      - ./libs/book-keeper:/usr/src/miku-credit/libs/book-keeper
+    ports:
+      - '3334:80'
+    depends_on:
+      - db
+      - kafka
+  subcriptio-muneris:
+    build:
+      context: ../
+      dockerfile: ./development/Dockerfile.dev
+      args:
+        - PORT=80
+    command: ['subcriptio-muneris']
+    image: subcriptio-muneris
+    environment:
+      - POSTGRESQL_HOST=db
+      - POSTGRESQL_PORT=5432
+      - POSTGRESQL_USERNAME=subcriptiomuneris
+      - POSTGRESQL_PASSWORD=password
+      - POSTGRESQL_DATABASE=subcriptiomuneris
+      - KAFKA_URL=kafka:9092
+      - NODE_ENV=development
+    links:
+      - db:db
+      - kafka:kafka
+    volumes:
+      - ./apps/subcriptio-muneris:/usr/src/miku-credit/apps/subcriptio-muneris
+      - ./libs/subcriptio-muneris:/usr/src/miku-credit/libs/subcriptio-muneris
+    ports:
+      - '3335:80'
+    depends_on:
+      - db
+      - kafka
+  db:
+    image: postgres:latest
+    env_file: ./postgres.dev.env
+    ports:
+      - '5431:5432'
+  redis:
+    image: redis:latest
+    ports:
+      - '6378:6379'
+  flyway-main:
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://db/ -user=postgresql -password=password -connectRetries=60 migrate
+    volumes:
+      - ./sql/main:/flyway/sql
+    depends_on:
+      - db
+  flyway-bookkeeper:
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://db/bookkeeper -user=bookkeeper -password=password -connectRetries=60 migrate
+    volumes:
+      - ./sql/bookkeeper:/flyway/sql
+    depends_on:
+      - db
+      - flyway-main
+  flyway-subcriptiomuneris:
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://db/subcriptiomuneris -user=subcriptiomuneris -password=password -connectRetries=60 migrate
+    volumes:
+      - ./sql/subcriptiomuneris:/flyway/sql
+    depends_on:
+      - db
+      - flyway-main
+  zookeeper:
+    image: bitnami/zookeeper
+    ports:
+      - '2181:2181'
+    volumes:
+      - './zookeeper:/bitnami'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: bitnami/kafka
+    ports:
+      - '9092:9092'
+    volumes:
+      - './kafka:/bitnami'
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+    depends_on:
+      - zookeeper
