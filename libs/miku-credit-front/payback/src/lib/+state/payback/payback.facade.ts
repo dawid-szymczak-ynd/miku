@@ -13,6 +13,7 @@ export class PaybackFacade {
   public loaded$: Observable<boolean> = this.store.pipe(select(PaybackSelectors.getPaybackLoaded));
   public allPaybackPlans$: Observable<PaybackPlanInterface[]> = this.store.pipe(select(PaybackSelectors.getAllPayback));
   public selectedPaybackPlan$: Observable<PaybackPlanInterface> = this.store.pipe(select(PaybackSelectors.getSelected));
+  public error$: Observable<Error> = this.store.pipe(select(PaybackSelectors.getPaybackError));
 
   constructor(private readonly store: Store<fromPayback.PaybackPartialState>) {}
 
