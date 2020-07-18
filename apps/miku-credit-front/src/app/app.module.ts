@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { MikuCreditFrontLoanModule } from '@miku-credit/miku-credit-front/loan';
+import { MikuCreditFrontPaybackModule } from '@miku-credit/miku-credit-front/payback';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -31,6 +32,7 @@ import { routes } from './main.routes';
     }),
     HttpClientModule,
     MikuCreditFrontLoanModule,
+    MikuCreditFrontPaybackModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
