@@ -1,7 +1,7 @@
 import { ClientKafka } from '@nestjs/microservices';
 import { Test } from '@nestjs/testing';
 
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 import { ApiAuthController } from './api-auth.controller';
 
@@ -36,17 +36,23 @@ describe('ApiAuthController', () => {
     expect(subscribeToResponseOf).toBeCalledTimes(subscribeCount);
   });
 
-  it('should have googleAuth which do nothing', () => {
+  it('should have googleAuth which do nothing and allows to trigger passport auth', () => {
     const result = controller.googleAuth();
 
     expect(result).toEqual(undefined);
   });
 
-  it('should have googleAuthRedirect which return user data', () => {
+  it('should have googleAuthRedirect which redirect user', () => {
     const redirectMock = jest.fn();
 
     controller.googleAuthRedirect(({ redirect: redirectMock } as unknown) as Response);
 
     expect(redirectMock).toBeCalledWith('/sell-soul/first-step');
+  });
+
+  it('should have getProfile() which return user data', () => {
+    const result = controller.getProfile(({ user: { name: 'mockName' } } as unknown) as Request);
+
+    expect(result).toEqual({ name: 'mockName' });
   });
 });
