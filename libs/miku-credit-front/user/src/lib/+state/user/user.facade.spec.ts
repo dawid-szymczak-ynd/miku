@@ -45,17 +45,59 @@ describe('UserFacade', () => {
       try {
         let selectedUser = await readFirst(facade.selectedUser$);
         let isLoaded = await readFirst(facade.loaded$);
+        let isLoggedIn = await readFirst(facade.isLoggedIn$);
 
         expect(selectedUser).toBe(undefined);
         expect(isLoaded).toBe(false);
+        expect(isLoggedIn).toBe(false);
 
         facade.loadUser();
 
         selectedUser = await readFirst(facade.selectedUser$);
         isLoaded = await readFirst(facade.loaded$);
+        isLoggedIn = await readFirst(facade.isLoggedIn$);
 
         expect(selectedUser).toEqual({ id: 1 });
         expect(isLoaded).toBe(true);
+        expect(isLoggedIn).toBe(true);
+
+        done();
+      } catch (err) {
+        done.fail(err);
+      }
+    });
+
+    it('clearUser() should clear user state', async (done) => {
+      try {
+        let selectedUser = await readFirst(facade.selectedUser$);
+        let isLoaded = await readFirst(facade.loaded$);
+        let isLoggedIn = await readFirst(facade.isLoggedIn$);
+
+        expect(selectedUser).toBe(undefined);
+        expect(isLoaded).toBe(false);
+        expect(isLoggedIn).toBe(false);
+
+        facade.loadUser();
+
+        selectedUser = await readFirst(facade.selectedUser$);
+        isLoaded = await readFirst(facade.loaded$);
+        isLoggedIn = await readFirst(facade.isLoggedIn$);
+
+        expect(selectedUser).toEqual({ id: 1 });
+        expect(isLoaded).toBe(true);
+        expect(isLoggedIn).toBe(true);
+
+        facade.clearUser(new Error());
+
+        const error = await readFirst(facade.error$);
+        selectedUser = await readFirst(facade.selectedUser$);
+        isLoaded = await readFirst(facade.loaded$);
+        isLoggedIn = await readFirst(facade.isLoggedIn$);
+
+        expect(selectedUser).toEqual(null);
+        expect(isLoaded).toBe(false);
+        expect(isLoggedIn).toBe(false);
+        expect(error).toEqual(new Error());
 
         done();
       } catch (err) {

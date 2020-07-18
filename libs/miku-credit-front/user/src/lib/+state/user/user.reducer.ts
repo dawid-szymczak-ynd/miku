@@ -28,7 +28,10 @@ const userReducer = createReducer(
   on(UserActions.loadUserSuccess, (state, { user }) =>
     userAdapter.setOne(user, { ...state, loaded: true, error: null, selectedId: user.id })
   ),
-  on(UserActions.loadUserFailure, (state, { error }) => ({ ...state, error }))
+  on(UserActions.loadUserFailure, (state, { error }) => ({ ...state, error })),
+  on(UserActions.clearUser, (state, { error }) =>
+    userAdapter.removeAll({ ...state, loaded: false, error, selectedId: null })
+  )
 );
 
 export function reducer(state: State | undefined, action: Action): State {

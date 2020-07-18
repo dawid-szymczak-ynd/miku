@@ -31,5 +31,15 @@ describe('User Reducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.error).toEqual(new Error());
     });
+
+    it('clearUser should clear user state and optionally set error', () => {
+      const action = UserActions.clearUser({ error: new Error() });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.error).toEqual(new Error());
+      expect(result.ids).toEqual([]);
+      expect(result.selectedId).toEqual(null);
+    });
   });
 });
