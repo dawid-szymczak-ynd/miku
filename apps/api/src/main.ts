@@ -1,6 +1,7 @@
 import { REDIS_CLIENT } from '@miku-credit/api/common';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import * as ConnectRedis from 'connect-redis';
@@ -19,11 +20,12 @@ const OPTIONS = new DocumentBuilder()
   .build();
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const port = process.env.PORT || DEFAULT_PORT;
   const redisClient = app.get(REDIS_CLIENT);
   const document = SwaggerModule.createDocument(app, OPTIONS);
 
+  app.set('trust proxy', 1);
   app.use(
     ExpressSession({
       store: new (ConnectRedis(ExpressSession))({
