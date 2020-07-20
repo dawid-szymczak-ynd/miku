@@ -1,8 +1,7 @@
-import { CreateUserMessage, FindUserByIdMessage, UserInterface } from '@miku-credit/api-interfaces';
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateUserMessage, FindUserByEmailMessage, UserInterface } from '@miku-credit/api-interfaces';
+import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
-import { Profile } from 'passport';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -10,21 +9,19 @@ import { switchMap } from 'rxjs/operators';
 export class ApiAuthService {
   constructor(@Inject('USER_SERVICE') private readonly userServiceClient: ClientKafka) {}
 
-  public authorizeUser({ emails, name }: Profile): Observable<UserInterface> {
+  public authorizeUser(email: string, name?: string): Observable<UserInterface> {
     return this.userServiceClient
-      .send<UserInterface, FindUserByIdMessage>('user.findByEmail', { email: emails[0].value })
+      .send<UserInterface, FindUserByEmailMessage>('user.findByEmail', { email })
       .pipe(
-        switchMap((response) => {
-          Logger.log(response);
-
-          if (response?.id) {
-            return of(response);
+        switchMap((user) => {
+          if (user) {
+            return of(user);
           }
 
           return this.userServiceClient.send<UserInterface, CreateUserMessage>('user.create', {
             userData: {
-              email: emails[0].value,
-              name: name.givenName,
+              email,
+              name,
               scoring: 100,
             },
           });

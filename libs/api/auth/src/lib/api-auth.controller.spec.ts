@@ -47,7 +47,7 @@ describe('ApiAuthController', () => {
 
     controller.googleAuthRedirect(({ redirect: redirectMock } as unknown) as Response);
 
-    expect(redirectMock).toBeCalledWith('/sell-soul/first-step');
+    expect(redirectMock).toBeCalledWith('/sell-soul/flow/first-step');
   });
 
   it('should have getProfile() which return user data', () => {

@@ -1,6 +1,6 @@
 import { UserInterface } from '@miku-credit/api-interfaces';
 
-export interface FindUserByIdMessage {
+export interface FindUserByEmailMessage {
   email: string;
 }
 

@@ -1,7 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { cold } from '@nrwl/angular/testing';
 
-import { Profile } from 'passport';
 import { of } from 'rxjs';
 
 import { ApiAuthService } from './api-auth.service';
@@ -28,10 +27,7 @@ describe('ApiAuthService', () => {
 
   it('should have authorizeUser which return user when they exists', () => {
     const { send } = clientKafkaMock;
-    const result$ = service.authorizeUser({
-      name: { givenName: 'mockName' },
-      emails: [{ value: 'mockEmail' }],
-    } as Profile);
+    const result$ = service.authorizeUser('mockEmail', 'mockName');
     const expected$ = cold('(a|)', {
       a: { id: 'userExist' },
     });
@@ -46,10 +42,7 @@ describe('ApiAuthService', () => {
     (send as jest.Mock).mockClear();
     (send as jest.Mock).mockImplementationOnce(() => of(undefined)).mockImplementationOnce(() => of({ id: 'created' }));
 
-    const result$ = service.authorizeUser({
-      name: { givenName: 'mockName' },
-      emails: [{ value: 'mockEmail' }],
-    } as Profile);
+    const result$ = service.authorizeUser('mockEmail', 'mockName');
     const expected$ = cold('(a|)', {
       a: { id: 'created' },
     });
