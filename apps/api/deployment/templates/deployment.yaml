@@ -60,6 +60,11 @@ spec:
                 secretKeyRef:
                   name: api-gateway-google-secret
                   key: secret
+            - name: GOOGLE_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-gateway-google-secret
+                  key: url
             - name: KAFKA_URL
               value: kafka.persistance:9092
           ports:

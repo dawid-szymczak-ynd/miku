@@ -42,3 +42,5 @@ Thumbs.db
 
 /development/kafka
 /development/zookeeper
+/development/redis
+/development/postgres

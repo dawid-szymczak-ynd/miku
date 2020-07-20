@@ -15,14 +15,15 @@ services:
       - SESSION_SECRET=secret
       - GOOGLE_CLIENT_ID=830169605829-b7td2035q9pcj4auflh5v5sjkd77jdg5.apps.googleusercontent.com
       - GOOGLE_SECRET=du2qo-6k3vMCZQfhaZ-0FcYg
+      - GOOGLE_CALLBACK_URL=http://localhost:4200/api/auth/redirect
       - KAFKA_URL=kafka:9092
       - NODE_ENV=development
     links:
       - redis:redis
       - kafka:kafka
     volumes:
-      - ./apps/api:/usr/src/miku-credit/apps/api
-      - ./libs/api:/usr/src/miku-credit/libs/api
+      - ../apps/api:/usr/src/miku-credit/apps/api
+      - ../libs:/usr/src/miku-credit/libs
     ports:
       - '3333:80'
     depends_on:
@@ -34,15 +35,15 @@ services:
       dockerfile: ./development/Dockerfile.dev
       args:
         - PORT=4200
-    command: ['miku-credit-front']
+    command: ['miku-credit-front', '--host=0.0.0.0']
     image: miku-credit-front
     environment:
       - NODE_ENV=development
     links:
       - api:api
     volumes:
-      - ./apps/miku-credit-front:/usr/src/miku-credit/apps/miku-credit-front
-      - ./libs/miku-credit-front:/usr/src/miku-credit/libs/miku-credit-front
+      - ../apps/miku-credit-front:/usr/src/miku-credit/apps/miku-credit-front
+      - ../libs:/usr/src/miku-credit/libs
     ports:
       - '4200:4200'
     depends_on:
@@ -67,8 +68,8 @@ services:
       - db:db
       - kafka:kafka
     volumes:
-      - ./apps/book-keeper:/usr/src/miku-credit/apps/book-keeper
-      - ./libs/book-keeper:/usr/src/miku-credit/libs/book-keeper
+      - ../apps/book-keeper:/usr/src/miku-credit/apps/book-keeper
+      - ../libs:/usr/src/miku-credit/libs
     ports:
       - '3334:80'
     depends_on:
@@ -94,8 +95,8 @@ services:
       - db:db
       - kafka:kafka
     volumes:
-      - ./apps/subcriptio-muneris:/usr/src/miku-credit/apps/subcriptio-muneris
-      - ./libs/subcriptio-muneris:/usr/src/miku-credit/libs/subcriptio-muneris
+      - ../apps/subcriptio-muneris:/usr/src/miku-credit/apps/subcriptio-muneris
+      - ../libs:/usr/src/miku-credit/libs
     ports:
       - '3335:80'
     depends_on:
@@ -104,10 +105,17 @@ services:
   db:
     image: postgres:latest
     env_file: ./postgres.dev.env
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
     ports:
       - '5431:5432'
   redis:
-    image: redis:latest
+    image: bitnami/redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PASSWORD=UnhEiwV9Iw
+    volumes:
+      - ./redis:/bitnami/redis/data
     ports:
       - '6378:6379'
   flyway-main:
