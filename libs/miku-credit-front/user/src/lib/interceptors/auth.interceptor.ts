@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 
 import { UserFacade } from '../+state/user/user.facade';
 
-const RESPONSE_UNAUTHORIZED_CODE = 401;
+const RESPONSE_UNAUTHORIZED_CODE = 403;
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

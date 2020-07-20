@@ -7,4 +7,12 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
   coverageDirectory: '../../../coverage/libs/book-keeper/calculation',
+  coverageThreshold: {
+    global: {
+      branches: 20,
+      functions: 70,
+      lines: 90,
+      statements: 90,
+    },
+  },
 };

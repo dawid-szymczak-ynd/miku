@@ -24,9 +24,9 @@ describe('AuthInterceptor', () => {
     const { navigate }: Router = TestBed.inject(Router);
     const { clearUser }: UserFacade = TestBed.inject(UserFacade);
     const result$ = interceptor.intercept({} as HttpRequest<unknown>, {
-      handle: jest.fn(() => throwError(new HttpErrorResponse({ status: 401 }))),
+      handle: jest.fn(() => throwError(new HttpErrorResponse({ status: 403 }))),
     });
-    const expected$ = cold('#', null, new HttpErrorResponse({ status: 401 }));
+    const expected$ = cold('#', null, new HttpErrorResponse({ status: 403 }));
 
     expect(result$).toBeObservable(expected$);
     expect(navigate).toBeCalledWith(['/sell-soul/login']);
