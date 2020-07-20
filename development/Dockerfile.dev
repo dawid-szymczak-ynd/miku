@@ -1,0 +1,10 @@
+FROM node:12.13.1-alpine3.10
+
+ARG PORT
+WORKDIR /usr/src/miku-credit
+COPY ./ /usr/src/miku-credit
+RUN npm install -g @angular/cli && npm ci
+
+ENTRYPOINT ["ng", "serve"]
+CMD ["api"]
+EXPOSE $PORT

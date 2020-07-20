@@ -4,6 +4,10 @@ import { SubcriptioMunerisUserController } from './subcriptio-muneris-user.contr
 import { SubcriptioMunerisUserService } from './subcriptio-muneris-user.service';
 
 describe('SubcriptioMunerisUserController', () => {
+  const serviceMock = {
+    create: jest.fn(() => Promise.resolve({ id: 2 })),
+    findOne: jest.fn(() => Promise.resolve({ id: 1 })),
+  };
   let controller: SubcriptioMunerisUserController;
 
   beforeEach(async () => {
@@ -11,10 +15,7 @@ describe('SubcriptioMunerisUserController', () => {
       providers: [
         {
           provide: SubcriptioMunerisUserService,
-          useValue: {
-            create: jest.fn(() => Promise.resolve({ raw: { id: 2 } })),
-            findOne: jest.fn(() => Promise.resolve({ id: 1 })),
-          },
+          useValue: serviceMock,
         },
       ],
       controllers: [SubcriptioMunerisUserController],
@@ -29,11 +30,23 @@ describe('SubcriptioMunerisUserController', () => {
     expect(result).toEqual({ id: 1 });
   });
 
-  it('should have createUser() which creates user and returns insert result', async () => {
+  it('should have createUser() which creates user and returns user', async () => {
     const result = await controller.createUser({
       value: { userData: { email: 'mockEmail', name: 'mockName', scoring: 12 } },
     });
 
     expect(result).toEqual({ id: 2 });
+  });
+
+  it('should have createUser() which creates user and throws error if creating user was failed', async () => {
+    serviceMock.create.mockImplementationOnce(() => Promise.reject(new Error()));
+
+    try {
+      await controller.createUser({
+        value: { userData: { email: 'mockEmail', name: 'mockName', scoring: 12 } },
+      });
+    } catch (e) {
+      expect(e).toEqual(new Error());
+    }
   });
 });

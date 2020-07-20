@@ -86,7 +86,7 @@ describe('BookKeeperCalculationController', () => {
 
   it('should have getLoans() which returns chunk of loans', async () => {
     const { getChunk } = serviceMock;
-    const result = await controller.getLoans({ skip: 1, take: 1 });
+    const result = await controller.getLoans({ value: { skip: 1, take: 1 } });
 
     expect(result).toEqual([{}]);
     expect(getChunk).toBeCalledWith(1, 1);
@@ -95,11 +95,13 @@ describe('BookKeeperCalculationController', () => {
   it('should have calculatePaybackPlan() which returns payback plan', async () => {
     const { findOneById } = serviceMock;
     const result = await controller.calculatePaybackPlan({
-      months: 8,
-      amount: 1000,
-      startDate: '1594893191834',
-      loanId: 1,
-      scoring: 100,
+      value: {
+        months: 8,
+        amount: 1000,
+        startDate: '1594893191834',
+        loanId: 1,
+        scoring: 100,
+      },
     });
 
     expect(result).toEqual({

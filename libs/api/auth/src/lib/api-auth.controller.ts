@@ -1,8 +1,12 @@
-import { Controller, Get, Inject, OnModuleInit, Res, UseGuards } from '@nestjs/common';
+import { User } from '@miku-credit/api-interfaces';
+import { Controller, Get, Inject, OnModuleInit, Req, Res, UseGuards } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { AuthGuard } from '@nestjs/passport';
+import { ApiResponse } from '@nestjs/swagger';
 
-import { Response } from 'express';
+import { Request, Response } from 'express';
+
+import { GoogleAuthLoginGuard } from './google-auth-login.guard';
+import { GoogleAuthenticatedGuard } from './google-authenticated.guard';
 
 @Controller('auth')
 export class ApiAuthController implements OnModuleInit {
@@ -14,12 +18,19 @@ export class ApiAuthController implements OnModuleInit {
   }
 
   @Get()
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(new GoogleAuthLoginGuard())
   public googleAuth(): void {}
 
   @Get('redirect')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(new GoogleAuthLoginGuard())
   public googleAuthRedirect(@Res() res: Response): void {
-    res.redirect('/sell-soul/first-step');
+    res.redirect('/sell-soul/flow/first-step');
+  }
+
+  @Get('profile')
+  @ApiResponse({ status: 200, type: User })
+  @UseGuards(new GoogleAuthenticatedGuard())
+  public getProfile(@Req() req: Request): User {
+    return req.user as User;
   }
 }

@@ -24,7 +24,12 @@
       "@miku-credit/subcriptio-muneris/common": ["libs/subcriptio-muneris/common/src/index.ts"],
       "@miku-credit/api/common": ["libs/api/common/src/index.ts"],
       "@miku-credit/subcriptio-muneris/user": ["libs/subcriptio-muneris/user/src/index.ts"],
-      "@miku-credit/api/auth": ["libs/api/auth/src/index.ts"]
+      "@miku-credit/api/auth": ["libs/api/auth/src/index.ts"],
+      "@miku-credit/api/payback": ["libs/api/payback/src/index.ts"],
+      "@miku-credit/api/loan": ["libs/api/loan/src/index.ts"],
+      "@miku-credit/miku-credit-front/payback": ["libs/miku-credit-front/payback/src/index.ts"],
+      "@miku-credit/miku-credit-front/loan": ["libs/miku-credit-front/loan/src/index.ts"],
+      "@miku-credit/miku-credit-front/user": ["libs/miku-credit-front/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,9 +1,8 @@
-import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { UserInterface } from '@miku-credit/api-interfaces';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 
-import { OAuth2Strategy, Profile, VerifyFunction } from 'passport-google-oauth';
-import { throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { OAuth2Strategy, Profile } from 'passport-google-oauth';
 
 import { ApiAuthService } from './api-auth.service';
 
@@ -13,28 +12,22 @@ export class GoogleStrategy extends PassportStrategy(OAuth2Strategy, 'google') {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: 'https://mikucredit.com/api/auth/redirect',
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
       scope: ['email', 'profile'],
     });
   }
 
-  public async validate(
-    accessToken: string,
-    refreshToken: string,
-    profile: Profile,
-    done: VerifyFunction
-  ): Promise<void> {
-    return await this.authService
-      .authorizeUser(profile)
-      .pipe(
-        tap((user) => Logger.log(user)),
-        map((user) => done(null, { ...user, accessToken, refreshToken })),
-        catchError((error) => {
-          done(new UnauthorizedException(error), null);
+  public async validate(accessToken: string, refreshToken: string, profile: Profile): Promise<UserInterface> {
+    try {
+      const user = await this.authService.authorizeUser(profile.emails[0]?.value, profile.displayName).toPromise();
 
-          return throwError(new UnauthorizedException(error));
-        })
-      )
-      .toPromise();
+      if (user) {
+        return user;
+      }
+
+      throw new UnauthorizedException();
+    } catch (e) {
+      throw new UnauthorizedException(e);
+    }
   }
 }

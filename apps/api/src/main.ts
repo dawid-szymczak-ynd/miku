@@ -1,6 +1,8 @@
 import { REDIS_CLIENT } from '@miku-credit/api/common';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import * as ConnectRedis from 'connect-redis';
 import * as ExpressSession from 'express-session';
@@ -10,12 +12,20 @@ import { AppModule } from './app/app.module';
 
 const DEFAULT_PORT = 80;
 const COOKIE_MAX_AGE = 1800000;
+const OPTIONS = new DocumentBuilder()
+  .setTitle('Api Gateway')
+  .setDescription('Api Gateway application public interface')
+  .setVersion('1.0')
+  .addTag('apiGateway')
+  .build();
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const port = process.env.PORT || DEFAULT_PORT;
   const redisClient = app.get(REDIS_CLIENT);
+  const document = SwaggerModule.createDocument(app, OPTIONS);
 
+  app.set('trust proxy', 1);
   app.use(
     ExpressSession({
       store: new (ConnectRedis(ExpressSession))({
@@ -33,6 +43,7 @@ async function bootstrap(): Promise<void> {
   );
   app.use(Passport.initialize());
   app.use(Passport.session());
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(port, () => {
     Logger.log(`Listening at http://localhost:${port}`);
