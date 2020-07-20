@@ -32,6 +32,7 @@ describe('BookKeeperCalculationService', () => {
       order: {
         id: 'ASC',
       },
+      relations: ['type'],
       skip: 0,
       take: 1,
     });

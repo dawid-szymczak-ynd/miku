@@ -1,4 +1,9 @@
-import { CalculatePaybackPlanMessage, LoansGetChunkMessage, PaybackPlanInterface } from '@miku-credit/api-interfaces';
+import {
+  CalculatePaybackPlanMessage,
+  LoanInterface,
+  LoansGetChunkMessage,
+  PaybackPlanInterface,
+} from '@miku-credit/api-interfaces';
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
@@ -6,7 +11,6 @@ import { Decimal } from 'decimal.js';
 
 import { BookKeeperCalculationService } from './book-keeper-calculation.service';
 import { CalculationHelper } from './calculation.helper';
-import { LoanEntity } from './loan.entity';
 
 @Controller('book-keeper-calculation')
 export class BookKeeperCalculationController {
@@ -36,7 +40,7 @@ export class BookKeeperCalculationController {
   }
 
   @MessagePattern('loans.getChunk')
-  public getLoans(@Payload() { value }: { value: LoansGetChunkMessage }): Promise<LoanEntity[]> {
+  public getLoans(@Payload() { value }: { value: LoansGetChunkMessage }): Promise<LoanInterface[]> {
     return this.bookKeeperCalculationService.getChunk(value.take, value.skip);
   }
 }

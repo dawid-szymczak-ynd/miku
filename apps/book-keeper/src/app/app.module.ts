@@ -1,3 +1,4 @@
+import { BookKeeperCalculationModule } from '@miku-credit/book-keeper/calculation';
 import { BookKeeperCommonModule } from '@miku-credit/book-keeper/common';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -14,6 +15,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
     }),
     BookKeeperCommonModule,
+    BookKeeperCalculationModule,
   ],
   controllers: [],
   providers: [],

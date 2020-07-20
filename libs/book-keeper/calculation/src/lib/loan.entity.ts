@@ -1,11 +1,11 @@
 import { LoanInterface } from '@miku-credit/api-interfaces';
 
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { LoanTypeEntity } from './loan-type.entity';
 
-@Entity()
-export class LoanEntity implements LoanInterface {
+@Entity({ name: 'loans' })
+export class LoanEntity extends BaseEntity implements LoanInterface {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -33,7 +33,7 @@ export class LoanEntity implements LoanInterface {
   @Column()
   public type_id: number;
 
-  @OneToOne((type) => LoanTypeEntity)
   @JoinColumn({ name: 'type_id' })
+  @ManyToOne((type) => LoanTypeEntity, (loanTypeEntity) => loanTypeEntity.loans)
   public type: LoanTypeEntity;
 }
