@@ -64,7 +64,7 @@
       "tags": ["mikuops:subcriptio-muneris", "type:feature"]
     },
     "api-auth": {
-      "tags": ["mikuops:api-gateway", "type:feature"]
+      "tags": ["mikuops:api-gateway", "type:common"]
     },
     "api-payback": {
       "tags": ["mikuops:api-gateway", "type:feature"]

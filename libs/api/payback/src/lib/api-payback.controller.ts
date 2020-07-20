@@ -1,14 +1,14 @@
 import { CalculatePaybackPlanBody, PaybackPlan } from '@miku-credit/api-interfaces';
+import { GoogleAuthenticatedGuard } from '@miku-credit/api/auth';
 import { Body, Controller, Inject, OnModuleInit, Post, UseGuards } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiCreatedResponse } from '@nestjs/swagger';
 
 import { Observable } from 'rxjs';
 
 import { ApiPaybackService } from './api-payback.service';
 
-@UseGuards(AuthGuard('google'))
+@UseGuards(new GoogleAuthenticatedGuard())
 @Controller('payback')
 export class ApiPaybackController implements OnModuleInit {
   constructor(
